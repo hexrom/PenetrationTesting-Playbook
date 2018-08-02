@@ -31,7 +31,17 @@ or
 >domain.com
 >ns1.domain.com
 ```
-$ Nmap -sS -sU -p53 -n target/24  
-$ Dig domain.com A - Query "A" Record of a domain  
-$ Dig +nocmd domain.com AXFR +noall +answer @serverIP - Zone Transfer  
-$ Dig @serverIP domain.com -t AXFR +nocookie - Zone Transfer  
+Queries and Zonetransfers w/ Dig
+```
+$ Dig domain.com A  (Query "A" Record of a domain)  
+$ Dig +nocmd domain.com AXFR +noall +answer @serverIP  (Zone Transfer)  
+$ Dig @serverIP domain.com -t AXFR +nocookie  (Zone Transfer)  
+```
+Find subdomains, zone transfer, dns enumeration etc. w/ Fierce
+```
+$ Fierce -dns domain.com 
+```
+Bruteforce subdomains w/ DNSMap
+```
+$ Dnsmap domain.com
+```

@@ -86,3 +86,12 @@ $ sudo nmap -sI zombieIP:135 targetIP -p 23 -Pn // Idle scan remote host with zo
 $ sudo hping3 -S -r targetIP -p 135 // Check if host good zombie candidate, look for id increment by 1
 $ sudo hping3 -a zombieIP -S targetIP -p 23 // Spoof source to zombie IP, if increments by 2 then port is open
 ```
+#### 1.2 Enumeration  
+_1.2.1 NetBIOS Enumeration_  
+Enum4Linux & SMBClient
+```
+$ enum4linux -a -v targetIP // NetBIOS enumeration scan
+$ smbclient -L targetIP // List share names
+$ smbclient \\\\targetIP\\Folder // Access share folder
+smb:> get filename.txt /home/root/Desktop/filename.txt
+```

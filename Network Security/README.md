@@ -48,3 +48,26 @@ HPing3
 $ sudo hping3 -F -P -U target -c 3 // Xmas discovery scan, RA flag
 $ sudo hping3 -1 192.168.1.x --rand-dest -I eth2 // host discovery on subnet on specificed interface
 ```
+
+_1.1.3 Active Recon_
+**Basic**  
+Nmap
+```
+$ sudo nmap -sS target -n // SYN scan, no hostname resolution
+$ sudo nmap -sS -n -Pn -iL target.txt // SYN scan, from list of known live hosts
+$ sudo nmap -sT target -F // TCP connect scan
+$ sudo nmap -sU target -p 21,53,80,111,137 // UDP scan on specificed ports
+$ sudo nmap -sX target --top-ports 200 // Xmas scan on top 200 ports
+```
+**Advanced**  
+Nmap
+```
+Bypass firewall with fragmentation  
+$ sudo nmap -f -sS targetIP -n -p 80,21,153,443 --disable-arp-ping -Pn --data-length 48
+Bypass firewall by spoofing MAC or vendor 
+$ sudo nmap --spoof-mac apple targetIP -p 80 -Pn --disable-arp-ping -n 
+Bypass firewall with source port
+$ sudo nmap --source-port 53 targetIP -sS
+Bypass firewall with Decoys
+$ sudo nmap -sS -DdecoyIP,decoyIP,ME,decoyIP targetIP -n
+```

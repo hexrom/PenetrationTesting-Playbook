@@ -95,3 +95,10 @@ $ smbclient -L targetIP // List share names
 $ smbclient \\\\targetIP\\Folder // Access share folder
 smb:> get filename.txt /home/root/Desktop/filename.txt
 ```
+_1.2.2 SNMP Enumeration (p.161)_   
+Nmap & Snmpwalk
+```
+$ sudo nmap -sU -p 161 --script snmp-brute targetIP // Find available community string
+$ snmpwalk -v 2c -c public targetIP // Enumerate SNMP information, where v = snmp version and c = community string
+$ sudo nmap -sU -p 161 --script snmp-win32-users targetIP // Enumerate Windows users through SNMP
+```

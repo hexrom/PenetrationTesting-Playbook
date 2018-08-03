@@ -70,3 +70,19 @@ $ sudo nmap --source-port 53 targetIP -sS
 Bypass firewall with Decoys
 $ sudo nmap -sS -DdecoyIP,decoyIP,ME,decoyIP targetIP -n
 ```
+Nmap NSE (Location: /usr/share/nmap/scripts/)
+```
+$ sudo nmap --script-updatedb // Update NSE DB
+$ sudo nmap --script-help "smb*" and discovery // search for script
+$ sudo nmap --script auth targetIP // all authentication scripts, loud
+$ sudo nmap --script smb-os-discovery -p 445 targetIP // SMB OS discovery
+$ sudo nmap --script smb-enum-shares targetIP -p 445 // Enumerate SMB shares
+```
+Idle Scans w/ Nmap & Hping3
+```
+$ sudo nmap --script ipidseq targetIP -p 135 // Check if IP good zombie candidate, use known open port for accuracy
+$ sudo nmap -sI zombieIP:135 targetIP -p 23 -Pn // Idle scan remote host with zombie IP on specified port
+
+$ sudo hping3 -S -r targetIP -p 135 // Check if host good zombie candidate, look for id increment by 1
+$ sudo hping3 -a zombieIP -S targetIP -p 23 // Spoof source to zombie IP, if increments by 2 then port is open
+```

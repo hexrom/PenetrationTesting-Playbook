@@ -8,7 +8,7 @@ $ whois domain.com
 or
 $ sudo nmap --script whois-domain domain.com -sn
 ```
-DNS Enumeration
+DNS Enumeration  
 Queries w/ Nslookup
 ```
 $ Nslookup -query=<Arg(any/MX/NS)> domain.com

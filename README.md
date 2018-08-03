@@ -1,7 +1,7 @@
-# eCPPT-Notes
-Notes and things from the eLearnSecurity eCPPT course
+# Penetration Testing Notes
+Notes and things I've collected throughout the eCPPT.
 
-### Table of Contents
+### Table of Content
 1. Network Security  
 2. PowerShell for Pentesters  
 3. Linux Exploitation  

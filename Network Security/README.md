@@ -9,29 +9,23 @@ or
 $ sudo nmap --script whois-domain domain.com -sn
 ```
 DNS Enumeration
-
+Queries w/ Nslookup
 ```
-$ Nslookup -query=any domain.com
-or
->nslookup
->server <target>
->set q=NS
->set q=MX
+$ Nslookup -query=<Arg(any/MX/NS)> domain.com
+or interactive
+$ nslookup
+>set q=<Arg(A/MX/NS)>
 >domain.com
->ns1.domain.com
 ```
 Queries and Zonetransfers w/ Dig
 ```
-$ Dig domain.com A  (Query "A" Record of a domain)  
-$ Dig +nocmd domain.com AXFR +noall +answer @serverIP  (Zone Transfer)  
-$ Dig @serverIP domain.com -t AXFR +nocookie  (Zone Transfer)  
+$ Dig +nocmd domain.com <Arg(MX/NS/A)> +noall +answer
+$ Dig +nocmd domain.com AXFR +noall +answer @domain.com - Zone Transfer
 ```
-Find subdomains, zone transfer, dns enumeration etc. w/ Fierce
+Other Options for DNS Enumeration
 ```
-$ Fierce -dns domain.com 
-```
-Bruteforce subdomains w/ DNSMap
-```
-$ Dnsmap domain.com
+$ fierce -dns domain.com
+$ dnsrecon -d domain.com
+$ dnsmap domain.com
 ```
 

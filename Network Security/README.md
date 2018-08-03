@@ -30,7 +30,7 @@ $ dnsmap domain.com
 ```
 
 _1.1.2 Host Discovery_  
-**Basic**
+**Basic**  
 Nmap
 ```
 $ sudo nmap -sn targetIP --disable-arp-ping

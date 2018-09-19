@@ -12,3 +12,7 @@ Panel 1
 Panel 2 // Registers view, displays all registers and their current values
 Panel 3 // Stack view, contains stack configuration. C1=Memory address
 ```
+Buffer Overflows
+```
+
+```

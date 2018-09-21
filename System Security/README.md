@@ -16,3 +16,8 @@ Buffer Overflows
 ```
 
 ```
+Shellcoding
+```
+connect back - initiates a connecton back to the attackers machine
+bind shell - binds a shell to a certain port on which the attacker can connect
+```

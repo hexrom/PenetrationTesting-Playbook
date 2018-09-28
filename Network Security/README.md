@@ -229,9 +229,10 @@ Configure Pivoting Envrionment
 msf> use post/multi/manage/autoroute // add target subnet and session id
 OR
 meterpreter> run auturoute -s TargetSubnet/24
-
 msf> route print // check if all traffic destined to that subnet goes through selected session host
 msf> use auxiliary/scanner/portscan/tcp // try to scan tcp ports in new subnet
+//To direct web server traffic to our local port, use port forwarding from foothold machine
+meterpreter> protfwd addd -l 8001 -p 80 -r TargetMachine
 
 > use auxiliary/server/socks4a && run // start a socks4a proxy server
 // edit proxychains conf file, sudo nano /etc/proxychains.conf ; only need to set last line as socks4 127.0.0.1 1080

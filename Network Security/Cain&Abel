@@ -1,0 +1,10 @@
+Host Discovery
+//Cain uses ARP scanner for host discovery
+Start Sniffer Component > Sniffer Tab > Hosts Subtab > Right-click Scan MAC addresses
+
+ARP Poisoning
+Sniffer Component > APR > + > Hijack traffic between Target and it's gateway. 
+Intercepted HTTP and FTP creds should be in the Passwords tab within the Sniffer component.
+
+Cracking
+Cracker tab > LM&NTLM Hashes > Right-click Add to List.

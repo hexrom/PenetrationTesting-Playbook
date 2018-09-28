@@ -133,7 +133,18 @@ $ medusa -h targetIP -M ssh -U usernames.txt -P passwords.txt // Run Medusa usin
 $ hydra -L usernames.txt -P passwords.txt ftp://targetIP // Run Hydra with usernames and password file against FTP, fast
 $ patator ftp_login host=FILE0 user=FILE1 password=FILE2 0=hostslist.txt 1=usernames.txt 2=passwords.txt -x ignore:mesg=”Login incorrect.” // Patator offers more modules and protocol support, and highly customizable. Man page at $vim /usr/bin/patator
 ```
-_1.3.2 Metasploit Framework_  
+_1.3.2 Nessus_  
+```
+Can use Nessus from Metaploit
+msf > load nessus
+msf > nessus_connect admin:admin@localhost
+msf > nessus_scan_list
+msf > nessus_db_import <ScanID>
+//Pentest Plugin: https://github.com/darkoperator/Metasploit-Plugins/blob/master/pentest.rb
+msf > load pentest
+msf > vuln_exploit //Once plugin is loaded. 
+```
+_1.3.3 Metasploit Framework_  
 ```
 $ sudo msfupdate
 $ sudo service postgresql start

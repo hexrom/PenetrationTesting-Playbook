@@ -226,7 +226,7 @@ c:\> netstat -ano // displays all active connections on victim machine
 _1.4.4 Pivoting_
 ```
 Configure Pivoting Envrionment
-> use post/windows/manage/autoroute // add target subnet and session id
+> use post/multi/manage/autoroute // add target subnet and session id
 > route print // check if all traffic destined to that subnet goes through selected session host
 > use auxiliary/scanner/portscan/tcp // try to scan tcp ports in new subnet
 

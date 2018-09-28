@@ -143,6 +143,8 @@ msf > nessus_db_import <ScanID>
 //Pentest Plugin: https://github.com/darkoperator/Metasploit-Plugins/blob/master/pentest.rb
 msf > load pentest
 msf > vuln_exploit //Once plugin is loaded. 
+
+//Can also use dumped system NTLM hash for an authenticated Nessus scan using it as Windows creds
 ```
 _1.3.3 Metasploit Framework_  
 ```

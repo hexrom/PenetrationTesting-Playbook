@@ -90,10 +90,17 @@ $ sudo hping3 -a zombieIP -S targetIP -p 23 // Spoof source to zombie IP, if inc
 _1.2.1 NetBIOS Enumeration_  
 Enum4Linux & SMBClient
 ```
+//Display NetBIOS name table
+$ nmblookup -A TargetIP //<20> identifier means host has file shares enabled
+//MSF auxiliary/smb/smb_login
+$ nmap --script smb-enum-users -p 445 TargetIP --script-args smbuser=administrator,smbpass=password
+
 $ enum4linux -a -v targetIP // NetBIOS enumeration scan
-$ smbclient -L targetIP // List share names
+$ smbclient -L targetIP -U administrator // List share names
 $ smbclient \\\\targetIP\\Folder // Access share folder
 smb:> get filename.txt /home/root/Desktop/filename.txt
+
+//MSF exploit/windows/smb/psexec
 ```
 _1.2.2 SNMP Enumeration (p.161)_   
 Nmap & Snmpwalk

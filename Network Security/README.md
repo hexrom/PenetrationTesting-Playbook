@@ -36,6 +36,8 @@ $ sudo nmap -sn targetIP --disable-arp-ping
 $ sudo nmap -sn -P<Arg(S/A)> targetIP --disable-arp-ping // TCP packet with SYN or ACK flag
 $ sudo nmap -sn -PE targetIP --disable-arp-ping // ICMP echo request
 $ sudo nmap -sn -PP targetIP --disable-arp-ping // Timestamp request
+
+$ nmap -sP -PR Subnet/24 //ARP ping scan
 ```
 FPing
 ```

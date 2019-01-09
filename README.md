@@ -1,5 +1,5 @@
 # Penetration Testing Notes
-Notes and things I've collected throughout the eCPPT.
+Notes and things I've collected split into following sections:
 
 ### Table of Content
 1. Network Security  
